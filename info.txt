@@ -1,0 +1,28 @@
+https://retoolapi.dev/1kaZ1d/data
+Endpoint URL
+
+HTTP method endpoints
+
+GET
+/1kaZ1d/data
+
+GET filter
+/1kaZ1d/data?Nombre=value
+
+GET by id
+/1kaZ1d/data/1
+
+GET paginate
+/1kaZ1d/data?_page=2&_limit=10
+
+POST
+/1kaZ1d/data
+
+PUT
+/1kaZ1d/data/1
+
+PATCH
+/1kaZ1d/data/1
+
+DELETE
+/1kaZ1d/data/1
