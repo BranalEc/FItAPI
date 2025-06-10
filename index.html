@@ -58,6 +58,23 @@
         </article>
     </dialog>
 
+    <dialog id="modal-editar">
+        <article>
+            <header>
+                <a href="#" class="close" id="btnCerrarEditar"></a>
+                <h3>Modificar Integrante</h3>
+            </header>
+            <form id="frmEditar">
+                <input type="text" id="idEditar" required>
+                <input type="text" id="nombreEditar" placeholder="Nombre" required>
+                <input type="text" id="apellidoEditar" placeholder="Apellido" required>
+                <input type="email" id="emailEditar" placeholder="Correo electrónico" required>
+                <input type="number" id="edadEditar" placeholder="edad" required>
+                <button type="submit" class="contrast">Guardar</button>
+            </form>
+        </article>
+    </dialog>
+
     <!--boton flotante-->
     <button class="add-button" id="btnAbrirModal" title="Agregar Integrante">
         <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none"

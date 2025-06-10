@@ -30,7 +30,7 @@ function mostrarDatos(datos) {
                 <td>${persona.Edad}</td>
                 <td>${persona.Email}</td>
                 <td>
-                    <button>Editar</button>
+                    <button onclick="AbrirModalEditar(${persona.id}, '${persona.Nombre}','${persona.Apellido}', '${persona.Email}','${persona.Edad}')">Editar</button>
                     <button onClick="EliminarPersona(${persona.id})">Eliminar</button>
                 </td>
             </tr>
@@ -100,14 +100,59 @@ async function EliminarPersona(id) {
 
         //Recargamos la tabla para ver la eliminacion
         obtenerPersonas();
-
-
-
-
-
-
-
-
-
     }
 }
+
+//Proceso para editar un registro
+const modalEditar = document.getElementById("modal-editar");
+const btnCerrarEditar = document.getElementById("btnCerrarEditar");
+
+btnCerrarEditar.addEventListener("click", ()=>{
+    modalEditar.close(); //Cerrar Modal de editar
+});
+
+function AbrirModalEditar(id,nombre,apellido,email,edad){
+    document.getElementById("idEditar").value = id;
+    document.getElementById("nombreEditar").value = nombre;
+    document.getElementById("apellidoEditar").value = apellido;
+    document.getElementById("emailEditar").value = email;
+    document.getElementById("edadEditar").value = edad;
+
+    modalEditar.showModal();
+}
+
+document.getElementById("frmEditar").addEventListener("submit", 
+    async e=>{
+        e.preventDefault(); //Evita que el formulario se envie
+
+        const id = document.getElementById("idEditar").value.trim();
+        const Nombre = document.getElementById("nombreEditar").value.trim();
+        const Apellido = document.getElementById("apellidoEditar").value.trim();
+        const Email = document.getElementById("emailEditar").value.trim();
+        const Edad = document.getElementById("edadEditar").value.trim();
+
+        if( !id|| !Nombre || !Apellido||!Edad||!Email){
+            alert("Complete todos los campos");
+            return; //Evitar que el formuario se envie
+        }
+
+        const respuesta = await fetch(`${API_URL}/${id}`,{
+            method: "PUT",
+            headers: {"Content-Type":"application/json"},
+            body: JSON.stringify({Edad,Email,Nombre,Apellido})
+        })
+
+        if(respuesta.ok){
+            alert("El registro fue editado correctamente");
+    
+            //Limpiar el formulario y cerrar el modal
+            document.getElementById("frmEditar").reset();
+            modal.close();
+            //Recargar tabla
+            obtenerPersonas();
+        }
+        else{
+            alert("Hubo un error al editar");
+        }
+    }
+);
